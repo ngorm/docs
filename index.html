@@ -299,6 +299,424 @@ instance of this object throughout your application life cycle. Make it a global
 or pass it in context.</p>
 </blockquote>
 
+          <h1 id="api">API</h1>
+
+<p>ngorm api borrows heavily from gorm. </p>
+
+<h2 id="db-addforeignkey"><code class="prettyprint">DB.AddForeignKey</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-addindex"><code class="prettyprint">DB.AddIndex</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-adduniqueindex"><code class="prettyprint">DB.AddUniqueIndex</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-assign"><code class="prettyprint">DB.Assign</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-association"><code class="prettyprint">DB.Association</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-attrs"><code class="prettyprint">DB.Attrs</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-automigrate"><code class="prettyprint">DB.Automigrate</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-commondb"><code class="prettyprint">DB.CommonDB</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-count"><code class="prettyprint">DB.Count</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-createtable"><code class="prettyprint">DB.CreateTable</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-delete"><code class="prettyprint">DB.Delete</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-dialect"><code class="prettyprint">DB.Dialect</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-dropcolumn"><code class="prettyprint">DB.DropColumn</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-droptable"><code class="prettyprint">DB.DropTable</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-droptableifexests"><code class="prettyprint">DB.DropTableIfExests</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-find"><code class="prettyprint">DB.Find</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-first"><code class="prettyprint">DB.First</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-firstorcreate"><code class="prettyprint">DB.FirstOrCreate</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-firstorinit"><code class="prettyprint">DB.FirstOrInit</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-group"><code class="prettyprint">DB.Group</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-hastable"><code class="prettyprint">DB.HasTable</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-having"><code class="prettyprint">DB.Having</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-set"><code class="prettyprint">DB.Set</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-joins"><code class="prettyprint">DB.Joins</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-last"><code class="prettyprint">DB.Last</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-limit"><code class="prettyprint">DB.Limit</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-model"><code class="prettyprint">DB.Model</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-modifycolumn"><code class="prettyprint">DB.ModifyColumn</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-not"><code class="prettyprint">DB.Not</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-offset"><code class="prettyprint">DB.Offset</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-omit"><code class="prettyprint">DB.Omit</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-or"><code class="prettyprint">DB.Or</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-order"><code class="prettyprint">DB.Order</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-pluck"><code class="prettyprint">DB.Pluck</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-preload"><code class="prettyprint">DB.Preload</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-related"><code class="prettyprint">DB.Related</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-removeindex"><code class="prettyprint">DB.RemoveIndex</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-save"><code class="prettyprint">DB.Save</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-select"><code class="prettyprint">DB.Select</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-singulattable"><code class="prettyprint">DB.SingulatTable</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-table"><code class="prettyprint">DB.Table</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-update"><code class="prettyprint">DB.Update</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-updatecolumn"><code class="prettyprint">DB.UpdateColumn</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-updatecolumns"><code class="prettyprint">DB.UpdateColumns</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-updates"><code class="prettyprint">DB.Updates</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
+<h2 id="db-where"><code class="prettyprint">DB.Where</code></h2>
+<pre class="highlight go tab-go"><code><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">User</span><span class="p">{})</span><span class="o">.</span><span class="n">AddForeignKeySQL</span><span class="p">(</span><span class="s">"city_id"</span><span class="p">,</span><span class="x"> </span><span class="s">"cities(id)"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">,</span><span class="x"> </span><span class="s">"RESTRICT"</span><span class="p">)</span><span class="x">
+</span></code></pre>
+<blockquote>
+<p>Generates </p>
+</blockquote>
+<pre class="highlight sql tab-sql--ql"><code><span class="c1">-- ql has no support for foreign keys</span>
+</code></pre><pre class="highlight sql tab-sql--postgresql"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="nv">"users"</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="nv">"users_city_id_cities_id_foreign"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"city_id"</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">cities</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">RESTRICT</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">RESTRICT</span><span class="p">;</span>
+</code></pre>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
